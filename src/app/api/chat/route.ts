@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
           controller.enqueue(
             encoder.encode(
               `data: ${JSON.stringify({
-                text: "\n\nI'm sorry, I encountered an error processing your question. Please try again.",
+                text: `\n\nI'm sorry, I encountered an LLM streaming error: ${error.message}`,
               })}\n\n`
             )
           );
@@ -83,7 +83,18 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     console.error("Chat API error:", error);
     return new Response(
-      JSON.stringify({ error: "An error occurred. Please try again." }),
+      JSON.stringify({
+        error: error.message || "An error occurred",
+        stack: error.stack,
+        env: {
+          hasGithubToken: !!process.env.GITHUB_TOKEN,
+          owner: process.env.GITHUB_OWNER,
+          repo: process.env.GITHUB_REPO,
+          provider: process.env.LLM_PROVIDER,
+          hasGroqKey: !!process.env.GROQ_API_KEY,
+          hasNvidiaKey: !!process.env.NVIDIA_API_KEY,
+        }
+      }),
       { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }
