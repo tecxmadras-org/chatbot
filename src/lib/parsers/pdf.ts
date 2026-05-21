@@ -13,13 +13,18 @@ export async function parsePDF(
   buffer: Buffer,
   filename: string
 ): Promise<TextChunk[]> {
-  const parser = new PDFParse({
-    data: new Uint8Array(buffer),
-    verbosity: VerbosityLevel.ERRORS,
-  });
-  const result = await parser.getText();
-  const fullText = result.pages.map((p: any) => p.text).join("\n");
-  return chunkText(fullText, filename);
+  try {
+    const parser = new PDFParse({
+      data: new Uint8Array(buffer),
+      verbosity: VerbosityLevel.ERRORS,
+    });
+    const result = await parser.getText();
+    const fullText = result.pages.map((p: any) => p.text).join("\n");
+    return chunkText(fullText, filename);
+  } catch (err) {
+    console.error(`[PDF] Failed to parse ${filename}:`, err);
+    return [];
+  }
 }
 
 /**
