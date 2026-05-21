@@ -21,6 +21,7 @@ interface TokenizedChunk {
 function tokenize(text: string): string[] {
   return text
     .toLowerCase()
+    .replace(/\./g, "") // so "b.tech" becomes "btech"
     .replace(/[^\w\s₹]/g, " ")
     .split(/\s+/)
     .filter((t) => t.length > 1);
@@ -65,7 +66,7 @@ function bm25Score(
 export function retrieveRelevantChunks(
   query: string,
   chunks: TextChunk[],
-  topK: number = 6
+  topK: number = 100
 ): TextChunk[] {
   if (chunks.length === 0) return [];
 

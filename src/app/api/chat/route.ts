@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     const allChunks = await getCachedChunks();
 
     // 2. Retrieve relevant chunks using BM25
-    const relevantChunks = retrieveRelevantChunks(message, allChunks, 6);
+    const relevantChunks = retrieveRelevantChunks(message, allChunks, 100);
 
     // 3. Build context string
     const context = relevantChunks
