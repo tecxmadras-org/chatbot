@@ -1,5 +1,3 @@
-import * as XLSX from "xlsx";
-
 export interface TextChunk {
   text: string;
   source: string;
@@ -8,16 +6,18 @@ export interface TextChunk {
 
 /**
  * Parse Excel (.xlsx) or CSV (.csv) buffer into text chunks.
- * Each row becomes a chunk with column headers as labels.
+ * Uses dynamic require to avoid import-time crashes on Vercel serverless.
  */
 export function parseExcel(buffer: Buffer, filename: string): TextChunk[] {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const XLSX = require("xlsx");
   const workbook = XLSX.read(buffer, { type: "buffer" });
   const chunks: TextChunk[] = [];
   let chunkIndex = 0;
 
   for (const sheetName of workbook.SheetNames) {
     const sheet = workbook.Sheets[sheetName];
-    const jsonData = XLSX.utils.sheet_to_json<Record<string, any>>(sheet);
+    const jsonData: Record<string, any>[] = XLSX.utils.sheet_to_json(sheet);
 
     if (jsonData.length === 0) continue;
 

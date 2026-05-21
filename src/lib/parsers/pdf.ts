@@ -1,5 +1,3 @@
-import { PDFParse, VerbosityLevel } from "pdf-parse";
-
 export interface TextChunk {
   text: string;
   source: string;
@@ -7,13 +5,15 @@ export interface TextChunk {
 }
 
 /**
- * Parse a PDF buffer into text chunks
+ * Parse a PDF buffer into text chunks.
+ * Loads pdf-parse dynamically to avoid import-time crashes in serverless functions.
  */
 export async function parsePDF(
   buffer: Buffer,
   filename: string
 ): Promise<TextChunk[]> {
   try {
+    const { PDFParse, VerbosityLevel } = require("pdf-parse");
     const parser = new PDFParse({
       data: new Uint8Array(buffer),
       verbosity: VerbosityLevel.ERRORS,
