@@ -17,7 +17,7 @@ export async function* streamNvidia(
   userMessage: string
 ): AsyncGenerator<string> {
   const nvidia = getClient();
-  const model = process.env.NVIDIA_MODEL || "openai/gpt-oss-20b";
+  const model = process.env.NVIDIA_MODEL || "meta/llama3-70b-instruct";
 
   const stream = await nvidia.chat.completions.create({
     model,
