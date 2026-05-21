@@ -34,22 +34,36 @@ export async function* streamLLMResponse(
 ): AsyncGenerator<string> {
   const provider = getProvider();
 
-  switch (provider) {
-    case "openai":
-      yield* streamOpenAI(systemPrompt, userMessage);
-      break;
-    case "anthropic":
-      yield* streamAnthropic(systemPrompt, userMessage);
-      break;
-    case "gemini":
-      yield* streamGemini(systemPrompt, userMessage);
-      break;
-    case "nvidia":
-      yield* streamNvidia(systemPrompt, userMessage);
-      break;
-    case "groq":
-    default:
-      yield* streamGroq(systemPrompt, userMessage);
-      break;
+  try {
+    switch (provider) {
+      case "openai":
+        yield* streamOpenAI(systemPrompt, userMessage);
+        break;
+      case "anthropic":
+        yield* streamAnthropic(systemPrompt, userMessage);
+        break;
+      case "gemini":
+        yield* streamGemini(systemPrompt, userMessage);
+        break;
+      case "nvidia":
+        yield* streamNvidia(systemPrompt, userMessage);
+        break;
+      case "groq":
+      default:
+        yield* streamGroq(systemPrompt, userMessage);
+        break;
+    }
+  } catch (error: any) {
+    if (provider === "groq" || provider === undefined) {
+      console.warn("Groq failed, falling back to Nvidia...", error.message || error);
+      try {
+        yield* streamNvidia(systemPrompt, userMessage);
+      } catch (nvidiaError: any) {
+        console.error("Nvidia fallback also failed:", nvidiaError);
+        throw nvidiaError;
+      }
+    } else {
+      throw error;
+    }
   }
 }
