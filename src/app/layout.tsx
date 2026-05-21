@@ -13,7 +13,6 @@ export const metadata: Metadata = {
     "AI chatbot",
     "college information",
   ],
-  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -35,6 +34,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Inject manifest with credentials to bypass Vercel Authentication in Preview deployments */}
+        <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials" />
+      </head>
       <body>
         <div className="mesh-gradient" aria-hidden="true" />
         {children}
