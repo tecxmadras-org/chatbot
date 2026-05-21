@@ -1,0 +1,17 @@
+College Name,Course,Department,Annual Fees (INR),Duration,Seats,Cutoff Score,Eligibility,Admission Deadline
+Anna University,B.Tech Computer Science,CSE,75000,4 years,120,185,10+2 with Maths and Physics,June 30 2025
+Anna University,B.Tech Electronics,ECE,72000,4 years,90,178,10+2 with Maths and Physics,June 30 2025
+Anna University,MBA,Management,125000,2 years,60,CAT 85+,Any UG degree,March 31 2025
+SRM University,B.Tech Computer Science,CSE,250000,4 years,180,SRMJEE Rank < 5000,10+2 with 60% in PCM,May 15 2025
+SRM University,B.Tech Mechanical,Mechanical,220000,4 years,120,SRMJEE Rank < 8000,10+2 with 60% in PCM,May 15 2025
+SRM University,B.Tech Aerospace,Aerospace,280000,4 years,60,SRMJEE Rank < 3000,10+2 with 70% in PCM,May 15 2025
+SRM University,B.Tech Aviation,Aviation,350000,4 years,40,SRMJEE Rank < 2000,10+2 with 70% in PCM,May 15 2025
+VIT Vellore,B.Tech CSE,Computer Science,195000,4 years,150,VITEEE Top 10000,10+2 with 60% aggregate,April 30 2025
+VIT Vellore,B.Tech AI & ML,Artificial Intelligence,210000,4 years,60,VITEEE Top 5000,10+2 with 65% in PCM,April 30 2025
+VIT Vellore,MBA,Business Administration,150000,2 years,90,CAT 80+,Any UG degree,March 15 2025
+Sathyabama University,B.Tech CSE,Computer Science,150000,4 years,200,Sathyabama Entrance 50+,10+2 with 50% in PCM,June 15 2025
+Sathyabama University,B.Tech Aeronautical,Aeronautical,170000,4 years,60,Sathyabama Entrance 55+,10+2 with 55% in PCM,June 15 2025
+Madras Institute of Technology,B.Tech Aerospace,Aerospace,45000,4 years,30,TNEA Rank < 500,10+2 with 75% in PCM,July 15 2025
+Madras Institute of Technology,B.Tech Electronics,ECE,42000,4 years,60,TNEA Rank < 800,10+2 with 70% in PCM,July 15 2025
+Hindustan University,B.Tech Aviation,Aviation,300000,4 years,50,HITSEEE Rank < 3000,10+2 with 60% in PCM,May 31 2025
+Hindustan University,B.Tech CSE,Computer Science,180000,4 years,150,HITSEEE Rank < 5000,10+2 with 55% in PCM,May 31 2025
